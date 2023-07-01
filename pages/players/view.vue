@@ -92,6 +92,19 @@
                 <h5 class="mb-0 font-weight-normal">{{ player.phoneNumber }}</h5>
               </div>
             </div>
+
+            <div class="row mb-2">
+              <div class="col-md-3">
+                <h5 class="mb-0">
+                  <span class="mb-0 mdi mdi-barcode"></span> BarCode
+                </h5>
+              </div>
+
+              <div class="col-md-9">
+                <h5 class="mb-0 font-weight-normal">{{ player.barCode }}</h5>
+              </div>
+            </div>
+
             <div class="row mb-2">
               <div class="col-md-3">
                 <h5 class="mb-0">

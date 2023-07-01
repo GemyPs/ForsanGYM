@@ -45,6 +45,15 @@
                       />
                     </div>
                     <div class="form-group">
+                      <label class="control-label"><i class="mdi mdi-barcode"></i> Barcode</label>
+                      <input
+                        class="form-control"
+                        type="text"
+                        v-bind:value="InputPlayer.barCode"
+                        @input="InputPlayer.barCode = $event.target.value"
+                      />
+                    </div>
+                    <div class="form-group">
                       <label class="control-label"><i class="mdi mdi-human-male-height-variant"></i> Height</label>
                       <input
                         class="form-control"
@@ -140,7 +149,8 @@ export default {
             player_id: player.id,
             plan_id: player.subscription.plan.id,
             beginDate: player.subscription.beginDate,
-            endDate: player.subscription.endDate
+            endDate: player.subscription.endDate,
+            barCode: player.barCode
           })
           this.$store.commit('editLastPlayerSubscription', {
             beginDate: player.subscription.beginDate,

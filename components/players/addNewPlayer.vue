@@ -34,7 +34,14 @@
                                    type="tel" placeholder="Enter the phone number">
                           </div>
                         </div>
-
+                        <div class="form-group row">
+                          <label class="control-label col-md-3">BarCode</label>
+                          <div class="col-md-8">
+                            <input v-model="InputPlayer.barCode"
+                                   class="form-control col-md-8"
+                                   type="text" placeholder="Scan the card here">
+                          </div>
+                        </div>
                         <div class="form-group row">
                           <label class="control-label col-md-3">height</label>
                           <div class="col-md-8">
@@ -173,6 +180,7 @@ export default {
       this.InputPlayer = {
         name:null,
         phoneNumber:null,
+        barCode:null,
         height:null,
         weight:null,
         plan:null,
@@ -244,8 +252,8 @@ export default {
             await axios.delete(`${this.MEDIA_API}/photo/delete/${this.InputPlayer.photo}`)
           this.$swal.fire({
             icon: 'error',
-            title: "Adding Operation FAILED",
-            text: e.response.data.message
+            title: "Adding Operation FAILED"
+            //text: e.response.data.message
           })
           this.resetForm()
           return false;
