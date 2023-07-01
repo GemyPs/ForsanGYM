@@ -25,7 +25,7 @@
                     <select name="searchOptions" id="searchOptionsId" class="form-control form-control-sm"
                             v-model="pickedSearchOption">
                       <option :value="null" disabled selected>Choose search options</option>
-                      <option :value="null">Default</option>
+                      <!--<option :value="null">Default</option>-->
                       <option v-for="searchOption in searchOptions" :value="searchOption.value" :key="searchOption.id">
                         {{ searchOption.name }}
                       </option>
@@ -167,6 +167,7 @@ export default {
       pickedPlan: null,
       searchOptions: [
         {name: "By ID", value: 'id'},
+        {name: "By barCode", value: 'barCode'},
         {name: "By begin Date", value: 'beginDate'},
         {name: "By endDate", value: 'endDate'},
         {name: "By Phone Number", value: 'phone'},
