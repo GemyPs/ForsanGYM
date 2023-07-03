@@ -170,7 +170,7 @@ export default {
         {name: "By barCode", value: 'barCode'},
         {name: "By begin Date", value: 'beginDate'},
         {name: "By endDate", value: 'endDate'},
-        {name: "By Phone Number", value: 'phone'},
+        {name: "By Phone Number", value: 'phone'}
       ],
       endedSubsMarked: false,
       clickedPlayer: null,
@@ -258,9 +258,33 @@ export default {
     },
     loadDataOfPage: function (page){
       this.pageNumber = page
-      this.$axios.$get('/player?limit=10&page='+page).then(res=>{
-        this.$store.commit('setPlayers', res)
-      })
+      if(this.pickedPlan){
+        this.$axios.$post('player/search?limit=10&page='+page, {
+          searchOption: "plan",
+          searchElement: this.pickedPlan
+        }).then(res=>{
+          this.$store.commit('setPlayers', res)
+        })
+      }
+      else if(this.pickedSearchOption=='ended'){
+        this.$axios.$post('player/search?limit=10&page='+page, {
+          searchOption: "ended",
+          }).then(res=>{
+            this.$store.commit('setPlayers', res)
+          })
+      }
+      else if(this.pickedSearchOption&&this.searchInput){
+        this.$axios.$post('player/search?limit=10&page='+page, {
+          searchOption: this.pickedSearchOption,
+          searchElement: this.searchInput
+        }).then(res=>{
+          this.$store.commit('setPlayers', res)
+        })
+      }else{
+        this.$axios.$get('/player?limit=10&page='+page).then(res=>{
+          this.$store.commit('setPlayers', res)
+        })
+      }
     },
     performSearch: async function (){
       // console.log("search for : ", this.searchInput)
@@ -307,7 +331,7 @@ export default {
     },
     showEndedSubscriptions: async function(){
       try{
-        this.pickedSearchOption = null
+        this.pickedSearchOption = "ended"
         this.searchInput = null
         this.pickedPlan = null
         const players = await this.$axios.$post('player/search?limit=10&page=1', {
