@@ -8,6 +8,7 @@ export const state = () => ({
     isLoaded:false,
     viewPlayer:{},
     count:0,
+    ActivePlayersCount:0,
     items: []
   },
   services: {
@@ -93,7 +94,9 @@ export const mutations = {
   setPlayersNumber(state, playerNumber){
     state.players.count = playerNumber
   },
-
+  setActivePlayersNumber(state, playerNumber){
+    state.players.ActivePlayersCount = playerNumber
+  },
   deletePlayer: function (state, player_id) {
     state.players.items = state.players.items.filter(player => {
       return player.id !== player_id

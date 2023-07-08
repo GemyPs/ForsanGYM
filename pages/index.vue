@@ -165,7 +165,7 @@ export default {
     if(store.state.players.count===0){
       try{
         const playersNumber = await $axios.$get('player/number')
-        store.commit('setPlayersNumber', playersNumber)
+        store.commit('setActivePlayersNumber', playersNumber)
       }catch (err){
         console.log('error on players number set (dashboard) :')
         console.log(err)
@@ -226,7 +226,7 @@ export default {
       return this.$store.state.totalIncome
     },
     numberOfPlayers: function (){
-      return this.$store.state.players.count
+      return this.$store.state.players.ActivePlayersCount
     },
     outcomes: function (){
       return this.$store.state.outcome.items
