@@ -158,10 +158,6 @@ import moment from "moment/moment";
 import Resubscribe from "../../components/players/resubscribe";
 import axios from "axios";
 import Paging from "../../components/paging";
-const enteredScearchInput = document.getElementById("exampleInputAmount");
-/*enteredScearchInput.addEventListener("input", ()=>{
-    performSearch();
-})*/
 export default {
 
   components: {Paging, Resubscribe, DeleteCheck, PageTitle, AddNewPlayer},
@@ -290,18 +286,27 @@ export default {
         })
       }
     },
+    /*ValidateSearchInput: function(){
+      if(this.searchOption === "phone"){
+        var phoneNumber = this.searchInput;
+        console.log(phoneNumber)
+        return (phoneNumber.length() === 11);
+      }
+    },*/
     performSearch: async function (){
       // console.log("search for : ", this.searchInput)
       // console.log("with option : ", this.pickedSearchOption)
       try{
         this.pickedPlan = null
-        const players = await this.$axios.$post('player/search?limit=10&page=1', {
-          searchOption: this.pickedSearchOption,
-          searchElement: this.searchInput
-        })
-        await this.$store.commit('setPlayers', players)
+        if(this.searchInput){
+          const players = await this.$axios.$post('player/search?limit=10&page=1', {
+            searchOption: this.pickedSearchOption,
+            searchElement: this.searchInput
+          })
+          await this.$store.commit('setPlayers', players)
+        }
       }catch (err){
-        this.$swal.fire({title:"Player Not Found", icon:"error"})
+        //this.$swal.fire({title:"Player Not Found", icon:"error"})
         console.log("error in search function in players/index")
         console.log(err)
       }
