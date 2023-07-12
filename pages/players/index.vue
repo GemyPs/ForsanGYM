@@ -33,11 +33,11 @@
                   </div>
                     <div class="input-group col form-group p-0 border-0">
                       <div class="input-group-prepend"><span class="input-group-text mdi mdi-search-web"></span></div>
-                      <input class="form-control" id="exampleInputAmount" type="text" placeholder="Search Here..."
+                      <input class="form-control" v-on:input="performSearch" id="exampleInputAmount" type="text" placeholder="Search Here..."
                       v-model="searchInput" @input="resetPlayers">
-                      <div class="input-group-append">
+                      <!--<div class="input-group-append">
                         <button class="btn btn-primary" @click="performSearch" >Search</button>
-                      </div>
+                      </div>-->
                     </div>
 
                   <div class="col-md-auto form-group">
@@ -158,8 +158,12 @@ import moment from "moment/moment";
 import Resubscribe from "../../components/players/resubscribe";
 import axios from "axios";
 import Paging from "../../components/paging";
-
+const enteredScearchInput = document.getElementById("exampleInputAmount");
+/*enteredScearchInput.addEventListener("input", ()=>{
+    performSearch();
+})*/
 export default {
+
   components: {Paging, Resubscribe, DeleteCheck, PageTitle, AddNewPlayer},
   data() {
     return {
@@ -175,7 +179,7 @@ export default {
       endedSubsMarked: false,
       clickedPlayer: null,
       searchInput: null,
-      pickedSearchOption: null,
+      pickedSearchOption: "barCode",
       MEDIA_API:process.env.MEDIA_API,
       pageNumber:1
     }
