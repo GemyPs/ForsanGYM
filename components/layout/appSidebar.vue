@@ -44,6 +44,7 @@ export default {
         {text: "Players", icon: "mdi mdi-account", route: {name: 'allPlayers'}},
         {text: "Plans", icon: "mdi mdi-chart-bar", route: {name: 'allPlans'}},
         {text: "Activities", icon: "mdi mdi-karate", route: {name: 'allActs'}},
+        {text: "Signed in players", icon: "mdi mdi-account-check", route: {name: 'SignedIn'}},
         {text: "Super Admin Panal", icon: "mdi mdi-crown", route: {name: 'superAdmin'}},
       ]
     }

@@ -306,7 +306,9 @@ export default {
           await this.$store.commit('setPlayers', players)
         }
       }catch (err){
-        //this.$swal.fire({title:"Player Not Found", icon:"error"})
+        if(this.pickedSearchOption === "barCode" && !this.players){
+            this.$swal.fire({title:"Player Not Found", icon:"error"})
+          }
         console.log("error in search function in players/index")
         console.log(err)
       }

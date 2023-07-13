@@ -11,6 +11,10 @@ export const state = () => ({
     ActivePlayersCount:0,
     items: []
   },
+  singnedPlayers: {
+    count:0,
+    items: []
+  },
   services: {
     isLoaded:false,
     items: []
