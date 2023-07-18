@@ -304,6 +304,8 @@ export default {
             searchElement: this.searchInput
           })
           await this.$store.commit('setPlayers', players)
+          if(this.pickedSearchOption === "barCode")
+            this.searchInput = null;
         }
       }catch (err){
         if(this.pickedSearchOption === "barCode" && !this.players){
