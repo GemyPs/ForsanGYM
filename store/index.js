@@ -4,6 +4,11 @@ import login from "../pages/auth/login";
 export const state = () => ({
   plans: [],
   activities: [],
+  signedinPlayers: {
+    isLoaded:false,
+    count:0,
+    items: []
+  },
   players: {
     isLoaded:false,
     viewPlayer:{},
@@ -64,6 +69,11 @@ export const mutations = {
     state.players.count = players.count
     state.players.isLoaded=true
 
+  },
+  setSignedInPlayers: function (state, players) {
+    state.signedinPlayers.items = players.items
+    state.signedinPlayers.count = players.count
+    state.signedinPlayers.isLoaded=true
   },
   addPlayer: function (state, player) {
     if(state.players.items.length<10){
