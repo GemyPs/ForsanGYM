@@ -36,18 +36,22 @@
                         <th>#</th>
                         <th>Id</th>
                         <th style="width: 20%">Name</th>
-                        <th>PhoneNumber</th>
-                        <th>Ended</th>
+                        <th>Phone Number</th>
+                        <th>Subscription State</th>
                       </tr>
                       </thead>
                       <tbody>
                       <!-- Start looping -->
-                      <tr v-for="(item, index) in signedinPlayersData" :key="((index + 1) + ((pageNumber-1)*10))">
+                      <tr v-for="(item, index) in signedinPlayersData" :key="((index + 1) + ((pageNumber-1)*10))"
+                          :class="item.ended === true ? 'bg-danger':'bg-success'" class="text-white">
                         <td>{{ (index + 1) + ((pageNumber-1)*10) }}</td>
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
                         <td>{{ item.phoneNumber }}</td>
-                        <td>{{ item.ended }}</td>
+                        <td >
+                          <i class="mdi" :class="item.ended === true ? 'mdi-alert-circle':'mdi-check-circle'"></i>
+                        {{item.ended === true ? 'Subscription Ended':'Subscription Active'}}
+                        </td>
                       </tr>
                       </tbody>
                     </table>
