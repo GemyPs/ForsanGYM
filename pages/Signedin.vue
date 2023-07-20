@@ -42,7 +42,7 @@
                       </thead>
                       <tbody>
                       <!-- Start looping -->
-                      <tr v-for="(item, index) in signedinPlayersData" :key="item.id">
+                      <tr v-for="(item, index) in signedinPlayersData" :key="((index + 1) + ((pageNumber-1)*10))">
                         <td>{{ (index + 1) + ((pageNumber-1)*10) }}</td>
                         <td>{{ item.id }}</td>
                         <td>{{ item.name }}</td>
@@ -108,6 +108,8 @@ export default {
     loadDataOfPage: function (page){
       this.pageNumber = page
        this.$axios.$get('/player/SignedInPlayers?limit=10&page='+page).then(res=>{
+         console.log('called ')
+         console.log(res)
           this.$store.commit('setSignedInPlayers', res)
       })
     },
