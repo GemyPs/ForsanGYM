@@ -35,6 +35,7 @@
                       <div class="input-group-prepend"><span class="input-group-text mdi mdi-search-web"></span></div>
                       <input class="form-control" v-on:input="performSearch" id="exampleInputAmount" type="text" placeholder="Search Here..."
                       v-model="searchInput" >
+                      <button class="btn btn-danger mx-2 p-1" @click.prevent="resetPlayers"> <i class="mdi mdi-undo"></i>Reset Table</button>
                       <!--<div class="input-group-append">
                         <button class="btn btn-primary" @click="performSearch" >Search</button>
                       </div>-->
@@ -304,8 +305,10 @@ export default {
             searchElement: this.searchInput
           })
           this.$store.commit('setPlayers', players)
-          if(!!players &&
-            this.pickedSearchOption === "barCode"){
+          if(!!players && !!players.items && !players.items.length){//no players found
+            throw Error('No players found')
+          }
+          if(this.pickedSearchOption === "barCode"){
             this.searchInput = null;
             this.$swal.fire({
               toast:true,
@@ -335,18 +338,18 @@ export default {
         // the code runs here if there is no input in the searching input
         return 0
       }catch (err){
+        this.$swal.fire({
+          toast:true,
+          title:"Player Not Found",
+          timer:'1000',
+          timerProgressBar:true,
+          icon:"error",
+          showConfirmButton:false,
+          position:'top-end'
+        })
         console.log("error in search function in players/index")
         console.log(err)
       }
-      this.$swal.fire({
-        toast:true,
-        title:"Player Not Found",
-        timer:'1000',
-        timerProgressBar:true,
-        icon:"error",
-        showConfirmButton:false,
-        position:'top-end'
-      })
     },
     searchByPlan: async function (){
       try{
