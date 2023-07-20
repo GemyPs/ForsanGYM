@@ -352,10 +352,12 @@ export const mutations = {
       arr[i].index--
     }
     state.admins.items.splice(admin.index, 1)
-  }
+  },
 
   //Admins area begin --
-
+  signPlayerIn: function (state, player){
+    state.signedinPlayers.items.push(player)
+  }
 }
 
 export const actions = {

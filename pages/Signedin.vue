@@ -1,6 +1,6 @@
 <template>
   <div id="Signedin">
-    <page-title icon="mdi mdi-home" title='Dashboard'/>
+    <page-title icon="mdi mdi-home" title='Daily attendance '/>
 
     <div class="row mt-3">
       <div class="col-md-12">
@@ -82,9 +82,10 @@
 </template>
 <script>
 import Paging from "../components/paging";
+import PageTitle from "@/components/layout/pageTitle.vue";
 export default {
 
-  components: {Paging},
+  components: {PageTitle, Paging},
   data() {
     return {
       API_URL: process.env.API_URL,

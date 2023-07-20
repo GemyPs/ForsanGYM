@@ -255,6 +255,7 @@ export default {
             title: "Adding Operation FAILED"
             //text: e.response.data.message
           })
+          console.log(e)
           this.resetForm()
           return false;
         }

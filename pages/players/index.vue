@@ -34,7 +34,7 @@
                     <div class="input-group col form-group p-0 border-0">
                       <div class="input-group-prepend"><span class="input-group-text mdi mdi-search-web"></span></div>
                       <input class="form-control" v-on:input="performSearch" id="exampleInputAmount" type="text" placeholder="Search Here..."
-                      v-model="searchInput" @input="resetPlayers">
+                      v-model="searchInput" >
                       <!--<div class="input-group-append">
                         <button class="btn btn-primary" @click="performSearch" >Search</button>
                       </div>-->
@@ -303,17 +303,50 @@ export default {
             searchOption: this.pickedSearchOption,
             searchElement: this.searchInput
           })
-          await this.$store.commit('setPlayers', players)
-          if(this.pickedSearchOption === "barCode")
+          this.$store.commit('setPlayers', players)
+          if(!!players &&
+            this.pickedSearchOption === "barCode"){
             this.searchInput = null;
-        }
-      }catch (err){
-        if(this.pickedSearchOption === "barCode" && !this.players){
-            this.$swal.fire({title:"Player Not Found", icon:"error"})
+            this.$swal.fire({
+              toast:true,
+              title:"Player Signed In",
+              timer:'1000',
+              timerProgressBar:true,
+              icon:"success",
+              showConfirmButton:false,
+              position:'top-end'
+            })
+            if(!!this.$store.state.signedinPlayers.isLoaded &&
+              this.$store.state.signedinPlayers.items.length < 10){
+              // if the count of signed in is more than 10 we dont need to add anything
+              //because it's not gonna be in the forst page
+              const player = Object.assign({},players.items[0])
+              player.ended = false
+              if(moment(player.subscription.endDate).isBefore(moment())){ // to match the data structure of signInPlayer in the store
+                player.ended = true
+              }
+              delete player.subscription
+              this.$store.commit('signPlayerIn',player)
+
+            }
+
           }
+        }
+        // the code runs here if there is no input in the searching input
+        return 0
+      }catch (err){
         console.log("error in search function in players/index")
         console.log(err)
       }
+      this.$swal.fire({
+        toast:true,
+        title:"Player Not Found",
+        timer:'1000',
+        timerProgressBar:true,
+        icon:"error",
+        showConfirmButton:false,
+        position:'top-end'
+      })
     },
     searchByPlan: async function (){
       try{

@@ -14,6 +14,7 @@ module.exports = {
     host:"127.0.0.1",
     port: 8001
   },
+  target:'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -94,6 +95,22 @@ module.exports = {
 
   router: {
     middleware: ['auth']
+    // extendRoutes(routes, resolve){
+    //   routes.push(
+    //     {path: '/', name: 'home', component: 'pages/index.vue'},
+    //     {path: '/login', name: 'login', component: 'pages/auth/login.vue'},
+    //     {path: '/players', name: 'allPlayers', component: 'pages/players/index.vue'},
+    //     {path: '/players/:id', name: 'singlePlayer', component: 'pages/players/view.vue'},
+    //     {path: '/plans', name: 'allPlans', component: 'pages/plans/index.vue'},
+    //     {path: '/plans/new', name: 'newPlan', component: 'pages/plans/new.vue'},
+    //     {path: '/activities', name : 'allActs', component: 'pages/activities/index.vue'},
+    //     {path: '/activities/new', name: 'newAct', component: 'pages/activities/new.vue'},
+    //     {path: '/activityPlayer/:id', name: 'viewActivityPlayer', component: 'pages/activities/viewActivityPlayer'},
+    //     {path: '/auth/login', name: 'auth.login', component: 'pages/auth/login'},
+    //     {path: '/superAdmin/', name: 'superAdmin', component: 'pages/superAdmin/index.vue'},
+    //     {path: '/superAdmin/viewAll', name: 'viewAdmins', component: 'pages/superAdmin/viewAdmins.vue'},
+    //   )
+    // }
   },
 
   auth: {
