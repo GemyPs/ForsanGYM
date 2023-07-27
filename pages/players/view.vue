@@ -270,6 +270,7 @@ export default {
   },
   data(){
     return{
+      MEDIA_API:process.env.MEDIA_API,
     }
   },
   methods: {
