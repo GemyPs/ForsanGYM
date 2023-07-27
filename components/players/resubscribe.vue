@@ -94,7 +94,6 @@ export default {
         }).then(res => {
 
           delete res.player
-          console.log(res)
           this.$store.commit('addSubscriptionIncome', res)
           this.$store.commit('editPlayer', {
             ...this.player,
