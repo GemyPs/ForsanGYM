@@ -1,10 +1,11 @@
 <template>
-  <div id="editButton">
+  <div id="editButton" >
     <div
       class="modal fade"
       id="staticBackdrop"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
+      @mouseenter="assignData"
     >
       <div class="modal-dialog">
         <div class="modal-content">
@@ -179,6 +180,17 @@ export default {
         this.InputPlayer.subscription.endDate !== this.originalDates.endDate;
 
     },
+    assignData(){
+      this.InputPlayer = Object.assign({},this.$store.state.players.items[this.$store.state.players.viewPlayer])
+      // all this assingment operations to avoid refrences
+      this.InputPlayer.subscription = Object.assign({}, this.InputPlayer.subscription)
+      this.InputPlayer.subscription.plan = Object.assign({}, this.InputPlayer.subscription.plan)
+
+      // for validations ( to avoid making unuseful requests )
+      this.originalDates.beginDate = this.InputPlayer.subscription.beginDate
+      this.originalDates.endDate = this.InputPlayer.subscription.endDate
+
+    }
   },
   created() {
     this.InputPlayer = Object.assign({},this.$store.state.players.items[this.$store.state.players.viewPlayer])
@@ -190,7 +202,7 @@ export default {
     this.originalDates.beginDate = this.InputPlayer.subscription.beginDate
     this.originalDates.endDate = this.InputPlayer.subscription.endDate
 
-  }
+  },
 };
 </script>
 

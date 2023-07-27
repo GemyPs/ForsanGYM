@@ -94,7 +94,7 @@ module.exports = {
   },
 
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
     // extendRoutes(routes, resolve){
     //   routes.push(
     //     {path: '/', name: 'home', component: 'pages/index.vue'},
