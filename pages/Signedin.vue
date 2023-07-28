@@ -38,6 +38,7 @@
                         <th style="width: 20%">Name</th>
                         <th>Phone Number</th>
                         <th>Subscription State</th>
+                        <th>Options</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -51,6 +52,9 @@
                         <td >
                           <i class="mdi" :class="item.ended === true ? 'mdi-alert-circle':'mdi-check-circle'"></i>
                         {{item.ended === true ? 'Subscription Ended':'Subscription Active'}}
+                        </td>
+                        <td>
+                          <button class="btn btn-primary" type="button" @click="viewPlayer(item)">View</button>
                         </td>
                       </tr>
                       </tbody>
@@ -115,6 +119,14 @@ export default {
          console.log('called ')
          console.log(res)
           this.$store.commit('setSignedInPlayers', res)
+      })
+    },
+    viewPlayer: function (player) {
+      this.$router.push({
+        name: 'singlePlayer',
+        params: {
+          id: player.id
+        },
       })
     },
   },
