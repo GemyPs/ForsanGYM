@@ -42,18 +42,12 @@
         </div>
 
         <div class="d-flex actions  text-center my-1 mx-auto w-100">
-          <button type="button" class="btn btn-outline-primary mx-auto w-100"
-                  v-if="!player.subscription.plan.id || player.invited > 0 " disabled>Freeze
-          </button>
-          <button type="button" class="btn btn-outline-primary mx-auto w-100" v-else v-on:click="freeze()">Freeze
+          <button type="button" class="btn btn-outline-primary mx-auto w-100" v-on:click="freeze()">Freeze
           </button>
         </div>
 
         <div class="d-flex actions  text-center my-1 mx-auto w-100">
-          <button type="button" class="btn btn-outline-secondary mx-auto w-100"
-                  v-if="!player.subscription.plan.id || player.freeze !==0" disabled>Invite Friend
-          </button>
-          <button type="button" class="btn btn-outline-secondary mx-auto w-100" v-else v-on:click="addInvite()">Invite
+          <button type="button" class="btn btn-outline-secondary mx-auto w-100" v-on:click="addInvite()">Invite
             Friend
           </button>
         </div>
@@ -194,7 +188,7 @@
               </div>
             </div>
 
-            <div class="row mb-2" v-if="player.invited === 0 ">
+            <div class="row mb-2">
               <div class="col-md-3">
                 <h5 class="mb-0">
                   <span class="mb-0 mdi mdi-snowflake"></span> Freezing
@@ -208,7 +202,7 @@
               </div>
             </div>
 
-            <div class="row mb-2" v-if="player.freeze === 0">
+            <div class="row mb-2">
               <div class="col-md-3">
                 <h5 class="mb-0">
                   <span class="mb-0 mdi mdi-account-arrow-right"></span> Invitation
@@ -346,8 +340,12 @@ export default {
             this.$axios.$post('player/inviteFriend/' + this.player.id, {
               invites: Number(res.value)
             }).then(() => {
-              this.$store.commit('setViewPlayer', {
+              this.$store.commit('editViewPlayer', {
                 ...this.player,
+                subscription: {
+                  ...this.player.subscription,
+                  endDate: moment(this.player.subscription.endDate).add(Number(res.value), 'day').format("YYYY-MM-DD")
+                },
                 invited: this.player.invited + Number(res.value)
               })
             }).catch(err => {
