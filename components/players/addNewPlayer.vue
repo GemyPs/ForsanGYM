@@ -169,7 +169,8 @@ export default {
         beginDate:null,
         endDate:null,
         dietPlan:null,
-        trainingPlan:null
+        trainingPlan:null,
+        barCode:null
       },
       MEDIA_API:process.env.MEDIA_API,
     }
@@ -280,6 +281,9 @@ export default {
       }
       if(!this.InputPlayer.trainingPlan){
         this.InputPlayer.trainingPlan = "None"
+      }
+      if(!this.InputPlayer.barCode){
+        this.InputPlayer.barCode = "1"
       }
       for (let i = 0, arr = Object.keys(this.InputPlayer); i < arr.length; i++) {
         if (!this.InputPlayer[arr[i]]) {
