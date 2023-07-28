@@ -62,7 +62,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/router',
+    '@nuxtjs/router', // comment when building for static production
     "vue-sweetalert2/nuxt",
     '@nuxtjs/auth-next'
   ],
@@ -95,7 +95,8 @@ module.exports = {
 
   router: {
     middleware: ['auth'],
-    // extendRoutes(routes, resolve){
+    // extendRoutes(routes, resolve){ // uncomment when building for static production
+    //   routes.splice(0, routes.length) // to remove the pregenerated routes
     //   routes.push(
     //     {path: '/', name: 'home', component: 'pages/index.vue'},
     //     {path: '/login', name: 'login', component: 'pages/auth/login.vue'},
@@ -109,6 +110,7 @@ module.exports = {
     //     {path: '/auth/login', name: 'auth.login', component: 'pages/auth/login'},
     //     {path: '/superAdmin/', name: 'superAdmin', component: 'pages/superAdmin/index.vue'},
     //     {path: '/superAdmin/viewAll', name: 'viewAdmins', component: 'pages/superAdmin/viewAdmins.vue'},
+    //     {path: '/signedinPlayers', name: 'SignedIn', component: 'pages/Signedin.vue'},
     //   )
     // }
   },
